@@ -75,8 +75,8 @@ int main(int argc, char *const *argv)
     }
     fd = open(argv[1], O_RDONLY);
     wfd = open("temp.c", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd == -1 || wfd == -1) {
-        my_errstr("brainrunner: error while loading file.\n");
+    if (fd == -1 || wfd == -1 || !my_strstr(argv[1], ".bf\0")) {
+        my_errstr("brainrunner: error while loading file, make sure handling .bf file.\n");
         return 84;
     }
     return brainfuck_to_cfile(fd, wfd);
